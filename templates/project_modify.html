@@ -1,0 +1,98 @@
+{% import 'macro/header.html' as header %}
+{% import 'macro/project_nav.html' as project %}
+{% import 'macro/type.html' as type %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/header.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project_nav.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/create.css')}}">
+
+
+<script src="{{url_for('static', filename='js/jquery-3.4.1.js')}}"></script>
+
+<style>
+    body{
+        background-color: rgb(245, 245, 245);
+    }
+    #modify_type{
+        border-bottom:2px solid rgba(0,0,255,0.6);
+        color: rgb(120, 120, 120);
+    }    
+    #static_ana:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    }    
+    #releases:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    }
+    #result_details:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    } 
+    #project_name{
+        padding-top: 7px;
+        vertical-align: middle;
+    }
+    #upload_form{
+        margin-top: 20px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .modify_form{
+        width: 725px;
+        margin: 10px auto;
+    }
+    
+</style>
+
+<body>
+    <div id="page">
+        <div id="header">
+            {{ header.header() }}             
+            {{ header.name(username)}}
+        </div>  
+        <div class="project">
+            {{ project.project_nav(project_info) }}
+        </div>   
+        
+        <div id="upload_form">
+            <div class="modify_form">
+                <p class="description3">Project name</p>
+                <textarea id="project_name" class="descriptionbox" type="text">{{project_info['project_name']}}</textarea>
+                <p class="description3">Project description</p>
+                <textarea id="project_description" class="descriptionbox" type="text">{{project_info['description']}}</textarea> 
+                <p class="description3">Select prgram code</p>
+                <input  style="display: none" type="file" id="program_code">
+                <div class="select">
+                    <span id="select_button" class="select_button">select</span> 
+                    <span id="select_print" class="select_print"> filename is here</span>
+                    <span id="code_size" class="code_size">15M</span>
+                </div>
+                <p id="release_title" class="description3">Release Description</p>
+                <textarea id="release_desc" class="descriptionbox" placeholder="A new release will be created due to the new code!! Please input main improvement of your code."></textarea>
+                <p class="type description3">Choose analysis type</p>
+    
+                {{ type.modify_type("Database connection", "description of Memory, memory is the memory by program!", types["Database connection"]) }}
+                {{ type.modify_type("Process", "description of Memory,  memory is the memory by program!", types["Process"]) }}
+                {{ type.modify_type("Thread", "description of Memory memory is the memory by program!", types["Thread"]) }}
+                {{ type.modify_type("Socket", "description of Memory memory is the memory by program!", types['Socket']) }}
+                {{ type.modify_type("File handler", "description of Memory memory is the memory by program!", types["File handler"]) }}
+                {{ type.modify_type("Memory", "description of Memory memory is the memory by program!", types["Memory"]) }}
+                
+                <button class="{{project_info['project_id']}}" id="create">Modify</button>
+                <span id="progress"> </span>
+                <span id="description4">input cannot be empty!</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="{{url_for('static', filename='js/header.js')}}"></script>
+<script src="{{url_for('static', filename='js/project_modify.js')}}"></script>
+<script>
+
+</script>

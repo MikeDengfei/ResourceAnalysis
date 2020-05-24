@@ -1,0 +1,48 @@
+{% import 'macro/header.html' as header %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/header.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/modify_pwd.css')}}">
+
+<script src="{{url_for('static', filename='js/jquery-3.4.1.js')}}"></script>
+<body>
+    <div id="page">
+        <div id="header">
+           {{ header.header() }} 
+            
+           {{ header.name(username)}}
+        </div> 
+        <div class="pwd">
+            <p class="pwd_title">Modify Password</p> 
+            <div class="modify_pwd">  
+                <p>Old password</p>        
+                <input id="old_pwd" type="text">
+                <p>
+                    <span>New password</span>
+                    <img id="duihao1" src="{{url_for('static', filename='img/duihao.png')}}">
+                    <img id="chahao1" src="{{url_for('static', filename='img/chahao.png')}}">
+                </p>
+                <input id="new_pwd" type="text">
+                <p>
+                    <span>Verify password</span>
+                    <img id="duihao2" src="{{url_for('static', filename='img/duihao.png')}}">
+                    <img id="chahao2" src="{{url_for('static', filename='img/chahao.png')}}">
+                </p>
+                <input id="ver_pwd" type="text"> 
+                <p id="pwd_desc">Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter.</p>
+                <button id="modify">Modify</button>          
+                <p id="pwd_tip"></p>
+            </div>
+        </div>        
+    </div>
+</body>
+</html>
+<script src="{{url_for('static', filename='js/header.js')}}"></script>
+<script src="{{url_for('static', filename='js/modify_pwd.js')}}"></script>
+

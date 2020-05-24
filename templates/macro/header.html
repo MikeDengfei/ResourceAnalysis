@@ -1,0 +1,50 @@
+{% macro header(label1="Sign in", label2="Sign up") %}
+    <li class="nav1"><a href="Why Source?">Why SouAna?</a>
+        <ul class="subnav" id="subnav1">
+            <li><a href="#">Code view</a></li>
+            <li><a href="#">Goop people</a></li>
+            <li><a href="#">Happy birthday</a></li>
+            <li><a href="#">result</a></li>
+            <li><a href="#">result</a></li>
+        </ul>
+    </li>
+    <li class="nav2"><a href="Enterprise?">Enterprise</a>
+        <ul class="subnav" id="subnav2">
+            <li><a href="#">codeview</a></li>
+            <li><a href="#">result</a></li>
+        </ul>
+    </li>
+    <li id="nav2"><a href="Explore?">Explore</a>
+        <ul class="subnav" id="subnav3">
+            <li><a href="#">codeview</a></li>
+            <li><a href="#">result</a></li>
+        </ul>
+    </li>
+    <li class="nav4"><a href="Marketplace?">Marketplace</a>
+        <ul class="subnav" id="subnav4">
+            <li><a href="#">codeview</a></li>
+            <li><a href="#">result</a></li>
+        </ul>
+    </li>
+    <span class="sign" id="signin">{{label1}}</span>
+    <span class="sign" id="signup">{{label2}}</span>
+{% endmacro %}
+
+{% macro name(username="Mike") %}
+    <div id="name">
+        <span id="user">{{username}}</span>
+        <img id="person" src="{{url_for('static', filename='img/person.png')}}">
+        <a class="create_pro" href="/create">+</a>
+        <span id="diag"> </span>
+        <span id="info_nav">
+            <span>Signed in as</span>
+            <span class="name">{{username}}</span>
+            <hr>
+            <span><a href="/project/list">Your project</a></span>
+            <span><a href="/create">Create project</a></span>
+            <span><a href="/logout">Logout</a></span>
+            <span><a href="/modify_pwd">Modify password</a></span>
+        </span>
+    </div>
+ 
+{% endmacro %}

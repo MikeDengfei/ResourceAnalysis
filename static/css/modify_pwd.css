@@ -1,0 +1,97 @@
+body{
+    background-color: rgb(245, 245, 245);
+}
+.pwd{
+    width: 330px;
+    height: auto;
+    margin: 100px auto;
+    text-align: center;
+}
+.pwd>p{
+    font-size: 15px;
+    font-weight: bold;
+}
+.modify_pwd{
+    width: 330px;
+    height: auto;
+    margin: 10px auto;
+    border: 1px solid rgb(200, 200, 200);
+    text-align: center;
+    border-radius: 4px;
+    background-color: white;
+    padding-bottom: 15px;
+}
+.modify_pwd>input{
+    display: inline-block;
+    width: 300px;
+    height: 30px;
+    border-radius: 3px;   
+    margin-top: -20px; 
+    border:1px solid rgb(200, 200, 200)
+}
+.modify_pwd>p{
+    display: inline-block;
+    width: 300px;
+    height: 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+}
+button{
+    color: white;
+    display: inline-block;
+    width: 300px;
+    height: 30px;
+    background-color: rgba(1,150,1,0.8);
+    border: 1px rgba(1,150,1,0.5) solid;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight:900;
+    margin-bottom: 2px;
+}
+#pwd_desc{
+    text-align: justify;
+    height: auto;
+    font-size: 12px;
+    color: rgba(200,0,0,0.8);
+}
+#pwd_tip{
+    text-align: left;
+    font-size: 12px;
+    margin-top: 2px;
+    margin-bottom: 0px;
+    color: red;
+    font-weight: bold;
+    display: none;
+}
+button:hover{
+    background-color: rgba(1,150,1,0.9);
+}
+#duihao1{
+    width: 13px;
+    height: 13px;
+    /* display: inline-block; */
+    display: none;
+    margin-left: 196px;
+}
+#chahao1{
+    width: 15px;
+    height: 15px;
+    /* display: inline-block; */
+    display: none;
+    margin-left: 194px;
+}
+#duihao2{
+    width: 13px;
+    height: 13px;
+    /* display: inline-block; */
+    display: none;
+    margin-left: 188px;
+}
+#chahao2{
+    width: 15px;
+    height: 15px;
+    /* display: inline-block; */
+    display: none;
+    margin-left: 186px;
+}

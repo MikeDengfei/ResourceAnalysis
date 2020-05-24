@@ -1,0 +1,53 @@
+.releases{
+    width: 750px;
+    height: auto;
+    background-color:white;
+    margin: 5px auto;
+    border: white 1px solid;
+    margin-top: 20px;
+}
+.quanquan{
+    width: 8px;
+    height: 8px;
+    border: 2px rgb(1,200,1) solid;
+    border-radius: 8px;
+ }
+.lineline{
+    border-left: 1px rgba(200,200,200,0.8) solid;
+    height: 100px;
+    font-weight: bold;
+    margin-left: 6px;
+    margin-top: -12px;
+}
+.release_nav{
+    width: 500px;
+    /* border: 1px solid blue; */
+    height: 100px;
+    margin-top: 10px;
+}
+.leftcol{
+    width: auto;
+    margin-left: 10px;
+    display: inline-block;
+}
+.rightcol{
+    float: right;
+    width: 460px;
+    /* border: 1px solid blue; */
+    margin-top: 5px;
+}
+.release_desc{
+    color: rgba(100,100,100,0.8);
+}
+.comparison{
+    width: auto;
+    height: 320px;
+    /* border: blue 1px solid; */
+}
+#final_release{
+    height: auto;
+}
+
+.release{
+    color: blue;
+}

@@ -1,0 +1,58 @@
+{% import 'macro/header.html' as header %}
+{% import 'macro/type.html' as type %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/header.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project_list.css')}}">
+<style>
+    body{
+        background-color: rgb(245, 245, 245);
+    }
+    
+</style>
+
+<script src="{{url_for('static', filename='js/jquery-3.4.1.js')}}"></script>
+
+<body>
+    <div id="page">
+        <div id="header">
+           {{ header.header() }} 
+            
+           {{ header.name(username)}}
+        </div> 
+
+        <div class="list">
+            <p>You have {{project_size}} projects</p>
+            {% for project in project_list %}
+            <div class="list1" id="{{project['id']}}">
+                <span class="project1">
+                    <p class="pro_name">{{project['project_name']}}_v{{ project['version_num']}}</a></p>
+                    <p class="pro_info">{{project['description']}}</p>
+                    <div class="pro_type">
+                        <span class="type">types:</span>
+                        {% for type in project['types'] %}
+                        <span class="source_type">{{type}}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="pro_code">
+                        <span class="code"></span>
+                        <span class="code_name">{{project['program_file']}}</span>
+                    </div>
+                </span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+<script src="{{url_for('static', filename='js/header.js')}}"></script>
+<script>
+    $(".list1").click(function(){
+        window.location.href = "/project/result?project_id="+$(this).attr('id');
+    });
+</script>

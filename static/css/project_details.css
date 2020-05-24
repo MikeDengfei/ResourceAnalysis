@@ -1,0 +1,43 @@
+.details{
+    width: 750px;
+    height: 500px;
+    /* background-color:white; */
+    margin: 5px auto;
+    margin-top: 20px;
+}
+
+.d1,.d2{
+    float: right;
+    width: 48%;
+    height: 280px;
+    background-color:white;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.d1{
+    float: left;
+}
+.detail_tip{
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    margin-bottom: 3px;
+}
+.detail_tip2{
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    margin-top: 310px;
+    margin-bottom: 3px;
+}
+.dtip1{
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.dtip2{
+    margin-left: 10px;
+}
+

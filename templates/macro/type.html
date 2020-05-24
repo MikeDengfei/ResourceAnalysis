@@ -1,0 +1,17 @@
+{% macro type(content, Description="Description of Memory") %}
+    <div class="type_block"> 
+        <input name='create_type' type="checkbox" value="{{content}}" />
+        <span class="type1"><p class="type_content">{{content}}</p><p class="type_desc">{{Description}}</p></span>
+    </div>
+{% endmacro %}
+
+{% macro modify_type(content, Description, type) %}
+    <div class="type_block"> 
+        {% if type==True %}
+        <input name='create_type' checked type="checkbox" value="{{content}}"/>
+        {% else %}
+        <input name='create_type' type="checkbox" value="{{content}}"/>
+        {% endif %}
+        <span class="type1"><p class="type_content">{{content}}</p><p class="type_desc">{{Description}}</p></span>
+    </div>
+{% endmacro %}

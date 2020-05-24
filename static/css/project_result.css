@@ -1,0 +1,75 @@
+.result,.comparison{
+    width: 750px;
+    height: auto;
+    background-color:white;
+    margin: 5px auto;
+    border: white 1px solid;
+    margin-top: 20px;
+}
+.comparison{
+    height: 300px;
+}
+
+.result1{
+    width: 97%;
+    height: auto;
+    margin:20px auto;
+    border: 1px solid rgb(200,200,200);
+    border-radius: 3px;
+    text-align: center;
+}
+.result_title{
+    width:100%;
+    height: 50px;
+    border-bottom: rgb(200,200,200) 1px solid;
+    text-align: center;
+    background-color: rgb(250, 250, 250);
+}
+.result_title>p{
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 13px;
+}
+.result_content{
+    display: inline-block;
+    /* width: 24%; */
+    text-align: center;
+}
+.config_content{
+    display: inline-block;
+    width: 15.6%;
+    text-align: center;
+}
+.result_content>p{
+    vertical-align: middle;
+}
+.result1>span{
+    display: inline-block;
+}
+.dynamic_result{
+    margin-top: 20px;
+}
+
+#quanquan1, #quanquan2{
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+.dotdot{
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: red;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.dottip{
+    color:red;
+    font-size: 14px;
+    width: 10px;
+    height: 10px;
+    vertical-align: middle;
+    font-weight: bold;
+}

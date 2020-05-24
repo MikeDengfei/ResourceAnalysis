@@ -1,0 +1,32 @@
+{% macro project_nav(project_info) %}
+    <p class="pro_name">{{project_info['user_name']+' / '+project_info['project_name']}}_v{{project_info['version_num']}}</p>
+    <p class="pro_desc">{{project_info['description']}}</p>
+    <div class="type_nav">
+        <span class="type">types:</span>
+        {% for type in project_info['types'] %}
+        <span class="source_type">{{type}}</span>
+        {% endfor %}
+    </div>
+    <input id="type_detail" style="display: none;" value="{{project_info['types']}}">
+    <div class="project_nav">
+        <span id="static_ana"><a href="result?project_id={{project_info['project_id']}}">Result</a></span>
+        <span id="modify_type"><a href="modify?project_id={{project_info['project_id']}}">Modify</a></span>
+        <span id="releases"><a href="releases?project_id={{project_info['project_id']}}">Releases</a></span>
+        <span id="result_details"><a href="details?project_id={{project_info['project_id']}}">Details</a></span>
+    </div> 
+{% endmacro %}
+
+{% macro project_nav1(project_info) %}
+    <a href="/project/releases?project_id={{project_info['project_id']}}">
+        <img id="return" src="{{url_for('static', filename='img/return.png')}}">
+    </a>
+    <p class="pro_name">{{project_info['user_name']+' / '+project_info['project_name']}}_v{{project_info['version_num']}}</p>
+    <p class="pro_desc">{{project_info['description']}}</p>
+    <div class="type_nav">
+        <span class="type">types:</span>
+        {% for type in project_info['types'] %}
+        <span class="source_type">{{type}}</span>
+        {% endfor %}
+    </div>
+    <input id="type_detail" style="display: none;" value="{{project_info['types']}}">
+{% endmacro %}

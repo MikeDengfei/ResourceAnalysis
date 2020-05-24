@@ -1,0 +1,85 @@
+.project{
+    padding-bottom: 5px;
+}
+.version{
+    width: 750px;
+    height: 760px;
+    background-color:white;
+    margin: 5px auto;
+    margin-top: 20px;
+    /* border: blue 1px solid; */
+}
+    
+.result1{
+    width: 97%;
+    height: auto;
+    margin:10px auto;
+    border: 1px solid rgb(200,200,200);
+    border-radius: 3px;
+    text-align: center;
+}
+.result_title{
+    width:100%;
+    height: 50px;
+    border-bottom: rgb(200,200,200) 1px solid;
+    text-align: center;
+    background-color: rgb(250, 250, 250);
+}
+.result_title>p{
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 13px;
+}
+.result_content{
+    display: inline-block;
+    /* width: 24%; */
+    text-align: center;
+}
+.result_content>p{
+    vertical-align: middle;
+}
+.result1>span{
+    display: inline-block;
+}
+.dynamic_result{
+    margin-top: 20px;
+}
+.detail_tip{
+    width: 750px;
+    height: 120px;
+    background-color: white;
+    margin: 2px auto;
+    margin-bottom: 3px;
+    /* border: 1px solid blue; */
+}
+#select3{
+    display: block;
+    border: 0.5px solid rgb(200, 200, 200);   
+    border-radius: 2px; 
+    margin-left: 10px;    
+}
+.d1,.d2{
+    float: left;
+    width: 46%;
+    height: 280px;
+    background-color:white;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: -10px;
+}
+.d2{
+    float: right;
+    margin-right: 10px;
+}
+.d1{
+    margin-left: 10px;
+}
+.dtip1{
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.dtip2{
+    margin-left: 10px;
+}

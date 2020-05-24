@@ -1,0 +1,55 @@
+{% import 'macro/header.html' as header %}
+{% import 'macro/type.html' as type %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/header.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/create.css')}}">
+
+<script src="{{url_for('static', filename='js/jquery-3.4.1.js')}}"></script>
+<body>
+    <div id="page">
+        <div id="header">
+           {{ header.header() }} 
+            
+           {{ header.name(username)}}
+        </div> 
+
+        <div id="upload_form">
+            <p class="description1">Create Project for Source Analysis of Program</p>
+            <p class="description2">select a program, and choose the analysis type.</p>
+            <div class="line"> </div>
+            <p class="description3">Project name</p>
+            <textarea id="project_name" class="descriptionbox" type="text"></textarea>
+            <p class="description3">Project description</p>
+            <textarea id="project_description" class="descriptionbox" type="text"></textarea>
+            <p class="description3">Select prgram code</p>
+            <input  style="display: none" type="file" id="program_code">
+            <div class="select">
+                <span id="select_button" class="select_button">select</span> 
+                <span id="select_print" class="select_print"> filename is here</span>
+                <span id="code_size" class="code_size">15M</span>
+            </div>
+            
+            <p class="type description3">Choose analysis type</p>
+
+            {{ type.type("Database connection", "description of Memory, memory is the memory by program!") }}
+            {{ type.type("Process", "description of Memory,  memory is the memory by program!") }}
+            {{ type.type("Thread", "description of Memory memory is the memory by program!") }}
+            {{ type.type("Socket", "description of Memory memory is the memory by program!") }}
+            {{ type.type("File handler", "description of Memory memory is the memory by program!") }}
+            {{ type.type("Memory", "description of Memory memory is the memory by program!") }}
+            
+            <button id="create">Create Project</button>
+            <span id="progress"> </span>
+            <span id="description4">input cannot be empty!</span>
+        </div>
+    </div>
+</body>
+</html>
+<script src="{{url_for('static', filename='js/header.js')}}"></script>
+<script src="{{url_for('static', filename='js/create.js')}}"> </script>

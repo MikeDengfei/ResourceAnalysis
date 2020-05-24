@@ -1,0 +1,69 @@
+{% import 'macro/header.html' as header %}
+{% import 'macro/project_nav.html' as project %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/header.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project_nav.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project_version.css')}}">
+<script src="{{url_for('static', filename='js/jquery-3.4.1.js')}}"></script>
+<script src="{{url_for('static', filename='js/echarts.min.js')}}"></script>
+
+<style>
+    body{
+        background-color: rgb(245, 245, 245);
+    }
+
+    #return{
+        width: 25px;
+        height: 25px;
+        float: right;
+        margin-right: 6px;
+    }
+</style>
+<body>
+    <div id="page">
+        <div id="header">
+            {{ header.header() }}             
+            {{ header.name(username)}}
+        </div>  
+
+        <div class="project">
+            <span id="pro_id" style="display: none">{{project_info["project_id"]}}</span>            
+            <span id="pro_vn" style="display: none">{{project_info["version_num"]}}</span>
+            {{ project.project_nav1(project_info) }}
+        </div>  
+
+        <div class="version">
+            <p class="dtip1">Resources</p>
+            <div class="result1 static_result">
+                <span id="static_title" class="result_title"><p>Static Analysis Result</p></span>                
+            </div>
+            <div class="result1 dynamic_result">
+                <span id="dynamic_title" class="result_title"><p>Dynamic Analysis Result</p></span> 
+            </div>      
+
+            <div class="detail_tip">
+                <p class="dtip1">Resources of top 7 modules</p>
+                <p class="dtip2">Following graphs show the distribution of resources in the code.</p>
+                <select id="select3">
+                    <option>memory</option>
+                    <option>process</option>
+                    <option>thread</option>
+                    <option>socket</option>
+                    <option>file handler</option>
+                    <option>DB connection</option>                  
+                </select>
+            </div>
+            <div class="d1" id="static"></div>
+            <div class="d2" id="dynamic"></div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="{{url_for('static', filename='js/header.js')}}"></script>
+<script src="{{url_for('static', filename='js/project_version.js')}}"></script>

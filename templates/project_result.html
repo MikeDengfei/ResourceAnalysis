@@ -1,0 +1,120 @@
+{% import 'macro/header.html' as header %}
+{% import 'macro/project_nav.html' as project %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/header.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project_nav.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project_result.css')}}">
+<script src="{{url_for('static', filename='js/jquery-3.4.1.js')}}"></script>
+<script src="{{url_for('static', filename='js/echarts.min.js')}}"></script>
+
+<style>
+    body{
+        background-color: rgb(245, 245, 245);
+    }
+    #static_ana{
+        border-bottom:2px solid rgba(0,0,255,0.6);
+        color: rgb(120, 120, 120);
+    }   
+    #modify_type:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    }   
+    #releases:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    }
+    #result_details:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    } 
+</style>
+
+<body>
+    <div id="page">
+        <div id="header">
+            {{ header.header() }}             
+            {{ header.name(username)}}
+        </div>  
+        <div class="project">
+            <span id="pro_id" style="display: none">{{project_info["project_id"]}}</span>
+            <span id="pro_vn" style="display: none">{{project_info["version_num"]}}</span>
+            {{ project.project_nav(project_info) }}
+        </div>    
+        <div class="result">
+            <div class="result1 static_result">
+                <span id="static_title" class="result_title"><p>Static Analysis Result</p></span>
+                <div id="quanquan1">
+                    <span class="dotdot dot0"> </span> 
+                    <span class="dotdot dot1"> </span> 
+                    <span class="dotdot dot2"> </span> 
+                    <span class="dottip">Processing</span>
+                </div>
+            </div>
+
+            <div class="result1 dynamic_result">
+                <span id="dynamic_title" class="result_title"><p>Dynamic Analysis Result</p></span>          
+                <div id="quanquan2">
+                    <span class="dotdot dot0"> </span> 
+                    <span class="dotdot dot1"> </span> 
+                    <span class="dotdot dot2"> </span> 
+                    <span class="dottip">Processing</span>
+                </div>
+            </div>
+
+            
+            <div class="result1 configuration">
+                <span id="configuration" class="result_title"><p>Configuration</p></span>          
+            </div>
+        </div>
+        <!-- <div class="comparison">            
+            <div id="static_comparison" style="width: 500px;height:300px;float: left;"></div>
+            <script type="text/javascript">
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('static_comparison'));
+                // 指定图表的配置项和数据
+                myChart.setOption({
+                    title: {
+                            text: 'comparison',
+                            padding: 10,
+                    },
+                    tooltip: {},
+                    legend: {
+                            data: ['static','dynamic','configuration'],
+                            padding:40
+                    },
+                    xAxis: {
+                            data: ["DB","Process","FH","Memeory","Threads"],
+                            axisLabel: {
+                                interval:0, //设置成 0 强制显示所有标签。
+                            }
+                    },
+                    yAxis: {},
+                    series: [{
+                            name: 'static',
+                            type: 'bar',
+                            data: ["1","4","3","4","2"]
+                    },
+                    {
+                            name: 'dynamic',
+                            type: 'bar',
+                            data: ["1","1","3","3","5"]
+                    },
+                    {
+                            name: 'configuration',
+                            type: 'bar',
+                            data: ["1","2","3","4","5"]
+                    }]
+                    
+                });
+                
+            </script>
+        </div> -->
+    </div>
+</body>
+</html>
+<script src="{{url_for('static', filename='js/header.js')}}"></script>
+<script src="{{url_for('static', filename='js/project_result.js')}}"></script>

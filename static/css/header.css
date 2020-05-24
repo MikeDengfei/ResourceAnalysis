@@ -1,0 +1,85 @@
+.sign{ display: none; }
+#person{
+    width: 20px;
+    height: 20px; 
+    margin-left: 10px; 
+}
+#name{
+    float: right;
+    width:auto;
+    height: 20px;
+    margin-top: 25px;
+    margin-right: 80px;
+    text-align: right;
+}
+#user{
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.create_pro{
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    font-size: 18px;
+    font-weight: bolder;
+    margin-top: -2px;
+}
+.create_pro:hover{
+    color:blue
+}
+#name>span{color: white;}
+#info_nav{
+    display: block;
+    padding-top: 10px;
+    background-color: white;
+    width:150px;
+    height: auto;
+    margin-top: -4px;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 4px ;
+    text-align: left;
+    visibility: hidden;
+}
+#info_nav>span{
+    width:140px;
+    height: 20px;
+    font-family:Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 0.7em;
+    color: rgb(60 , 60, 60);
+    display: block;
+    padding-left: 10px;
+}
+.name~span:hover{
+    background-color: rgba(0, 0, 200, 0.5);        
+}
+.name~span:hover>a{color: white;}
+#info_nav a{
+    font-family:Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 1em;
+    width: 130px;
+    display: inline-block;  
+    color: rgb(60 , 60, 60);  
+}
+#diag{
+    width: 8px;
+    height: 8px;
+    background-color:white;
+    display: block;
+    transform: rotate(45deg);
+    margin-left: 107px;
+    margin-top: 10px;
+    visibility: hidden;
+}
+.name{
+    font-weight: bolder;
+}
+#user:hover{
+    color:rgb(180, 160 , 117);
+    cursor: pointer;
+}
+#person:hover{
+    cursor: pointer;
+}

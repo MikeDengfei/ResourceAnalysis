@@ -1,0 +1,379 @@
+{% import 'macro/header.html' as header %}
+{% import 'macro/project_nav.html' as project %}
+{% import 'macro/release.html' as release %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/header.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project_nav.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project_details.css')}}">
+<script src="{{url_for('static', filename='js/jquery-3.4.1.js')}}"></script>
+<script src="{{url_for('static', filename='js/echarts.min.js')}}"></script>
+
+
+<style>
+    body{
+        background-color: rgb(245, 245, 245);
+    }
+    #static_ana:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    }   
+    #modify_type:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    }   
+    #result_details{
+        border-bottom:2px solid rgba(0,0,255,0.6);
+        color: rgb(120, 120, 120);
+    }
+    /* #releases:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    }   */
+    .detail_tip2{
+        width: 100%;
+        height: 70px;
+        background-color: white;
+        margin-top: 310px;
+        margin-bottom: 3px;
+    }
+    #zhexianouter{
+        width: 98.5%;
+        height: 330px;
+        background-color:white;
+        border: 1px solid rgb(200, 200, 200);
+        border-radius: 5px;
+        padding: 5px;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+    #zhexian{
+        width: 100%;
+        height: 250px;
+        background-color:white;
+    }
+    #select3{
+        display: block;
+        border: 0.5px solid rgb(200, 200, 200);   
+        border-radius: 2px; 
+        margin-left: 10px;    
+    }
+    .detail_tip2{
+        width: 100%;
+        height: 90px;
+        background-color: white;
+        margin-top: 310px;
+        margin-bottom: 3px;
+    }
+    
+    .detail_tip{
+        width: 100%;
+        height: 90px;
+        background-color: white;
+        margin-bottom: 3px;
+    }
+    .re{
+        height: 16px;
+        width: 70px;
+        display: inline-block;
+        margin:5px;
+        padding-bottom: 4px;
+        /* background-color: rgb(212,130,101); */
+        background-color: rgb(200, 200, 200);
+        /* color: white; */
+        color: rgb(240, 240, 240);
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 13px;
+    }
+    #re_6{
+        background-color: rgb(212,130,101);
+        color: white;
+    }
+</style>
+
+<body>
+    <div id="page">
+        <div id="header">
+            {{ header.header() }}             
+            {{ header.name(username)}}
+        </div>  
+        <div class="project">
+            <span id="pro_id" style="display: none">{{project_info["project_id"]}}</span>
+            {{ project.project_nav(project_info) }}
+        </div>    
+        <div class="details">
+            <div class="detail_tip">
+                <p class="dtip1">Resources of top 6 modules</p>
+                <p class="dtip2">Following graphs show the distribution of resources in the code.</p>
+                <select id="select3">
+                    <option>memory</option>
+                    <option>process</option>
+                    <option>thread</option>
+                    <option>socket</option>
+                    <option>file handler</option>
+                    <option>DB connection</option>                  
+                </select>
+            </div>
+            <!-- <div class="circle_row"> -->
+            <div class="d1" id="threads"></div>
+            <div class="d2" id="process"></div>
+            <!-- </div> -->
+            <div class="d1" style="display: none;" id="db"></div>
+            <div class="d2" style="display: none;" id="fh"></div>
+            <div class="d1" style="display: none;" id="memory"></div>
+            <div class="d2" style="display: none;" id="socket"></div>
+            <div class="detail_tip2">
+                <p class="dtip1">Module resources changes</p>
+                <p class="dtip2">Following graph shows resources of different modules in all releases. For visualization, results are normalized.</p>
+                <select id="select3">
+                    <option>fold2_concat</option>
+                    <option>fold2_merge</option>
+                    <option>fold_split</option>
+                    <option>init</option>
+                    <option>prio</option>
+                    <option>sendReplyToClient</option>
+                    
+                </select>
+            </div>
+            <div id="zhexianouter">
+                <span id="re_1" class="re" onclick="">DB</span>
+                <span id="re_2" class="re">Process</span>
+                <span id="re_3" class="re">Thread</span>
+                <span id="re_4" class="re">Socket</span>
+                <span id="re_5" class="re">FH</span>
+                <span id="re_6" class="re">Memory</span>
+                <div id="zhexian" style="height:300px"></div> 
+            </div>       
+            
+
+        </div>
+    </div>
+</body>
+</html>
+<script src="{{url_for('static', filename='js/header.js')}}"></script>
+
+<script>
+    function circlegraph(id, title, legend_data, series_name, series_data){
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById(id));
+        myChart.setOption({                    
+            title: {
+                text: title,
+                // x 设置水平安放位置，默认左对齐，可选值：'center' ¦ 'left' ¦ 'right' ¦ {number}（x坐标，单位px）
+                x: 'center',
+                // y 设置垂直安放位置，默认全图顶端，可选值：'top' ¦ 'bottom' ¦ 'center' ¦ {number}（y坐标，单位px）
+                y: 'top',
+                // itemGap设置主副标题纵向间隔，单位px，默认为10，
+                itemGap: 10,
+                backgroundColor: '#EEE',
+                // 主标题文本样式设置
+                textStyle: {
+                    fontSize: 15,
+                    color: 'rgb(100, 100, 100)'
+                },
+            },
+            
+            legend: {
+                // orient 设置布局方式，默认水平布局，可选值：'horizontal'（水平） ¦ 'vertical'（垂直）
+                orient: 'vertical',
+                // x 设置水平安放位置，默认全图居中，可选值：'center' ¦ 'left' ¦ 'right' ¦ {number}（x坐标，单位px）
+                x: 'left',
+                // y 设置垂直安放位置，默认全图顶端，可选值：'top' ¦ 'bottom' ¦ 'center' ¦ {number}（y坐标，单位px）
+                y: 'center',
+                itemWidth: 24,   // 设置图例图形的宽
+                itemHeight: 18,  // 设置图例图形的高
+                textStyle: {    
+                    color: '#666'  // 图例文字颜色
+                },
+                // itemGap设置各个item之间的间隔，单位px，默认为10，横向布局时为水平间隔，纵向布局时为纵向间隔
+                itemGap: 20,
+                // backgroundColor: '#eee',  // 设置整个图例区域背景颜色
+                data: legend_data
+            },
+            
+            series: [{
+                name: series_name,
+                type: 'pie',
+                // radius: '50%',  // 设置饼状图大小，100%时，最大直径=整个图形的min(宽，高)
+                radius: ['30%', '60%'],  // 设置环形饼状图， 第一个百分数设置内圈大小，第二个百分数设置外圈大小
+                center: ['60%', '50%'],  // 设置饼状图位置，第一个百分数调水平位置，第二个百分数调垂直位置
+                data: series_data,
+                // itemStyle 设置饼状图扇形区域样式
+                itemStyle: {
+                    // emphasis：英文意思是 强调;着重;（轮廓、图形等的）鲜明;突出，重读
+                    // emphasis：设置鼠标放到哪一块扇形上面的时候，扇形样式、阴影
+                    emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(30, 144, 255，0.5)'
+                    }
+                },
+                // 设置值域的那指向线
+                labelLine: {
+                    normal: {
+                    show: false   // show设置线是否显示，默认为true，可选值：true ¦ false
+                    }
+                },
+                // 设置值域的标签
+                label: {
+                    normal: {
+                    position: 'inner',  // 设置标签位置，默认在饼状图外 可选值：'outer' ¦ 'inner（饼状图上）'
+                    // formatter: '{a} {b} : {c}个 ({d}%)'   设置标签显示内容 ，默认显示{b}
+                    // {a}指series.name  {b}指series.data的name
+                    // {c}指series.data的value  {d}%指这一部分占总数的百分比
+                    formatter: '{c}'
+                    }
+                }
+            }],
+            
+            tooltip: {
+                // trigger 设置触发类型，默认数据触发，可选值：'item' ¦ 'axis'
+                trigger: 'item',
+                showDelay: 20,   // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+                hideDelay: 20,   // 隐藏延迟，单位ms
+                backgroundColor: 'rgba(255,0,0,0.7)',  // 提示框背景颜色
+                textStyle: {
+                fontSize: '16px',
+                color: '#eee'  // 设置文本颜色 默认#FFF
+                },
+                // formatter设置提示框显示内容
+                // {a}指series.name  {b}指series.data的name
+                // {c}指series.data的value  {d}%指这一部分占总数的百分比
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+        })
+    }
+   
+    var id = 'threads', title="Threads";
+    var legend_data = ["fold2_concat", "fold2_merge", "fold_split", "init", "prio", 'sendReplyToClient', 'others'];
+    var series_name = "Thread number";
+    var series_data = [ {value:32, name:'fold2_concat'},
+                        {value:32, name:'fold2_merge'},
+                        {value:16, name:'fold_split'},
+                        {value:16, name:'init'},
+                        {value:8, name:'prio'},
+                        {value:2, name:'sendReplyToClient'},
+                        {value:2, name:'others'}];
+    circlegraph(id, 'Static Results', legend_data, series_name, series_data);
+    circlegraph("process", 'Dynamic Results', legend_data, series_name, series_data);
+    var zhexian = echarts.init(document.getElementById('zhexian'));
+     // 定义样式和数据
+    var option = {           
+                  
+         backgroundColor: '#FFFFFF',
+         
+         tooltip : {//鼠标浮动时的工具条，显示鼠标所在区域的数据，trigger这个地方每种图有不同的设置
+             trigger: 'axis'
+         },
+         legend: {// 图例，每条折线或者项对应的示例
+            //  data:['DB', 'Process', 'Thread', 'Socket', 'File Handler', 'Memory'],
+             data:['Static', 'Dynamic'],
+             x:'center',
+             y:'20',
+         },
+         calculable : true,
+         xAxis : [
+             {
+                 axisLabel:{
+                     interval:0,
+                     color: 'black'
+                 },
+                 axisLine:{
+                     lineStyle :{
+                         color: '#CCCCCC'
+                     }
+                 },
+                 type : 'category',
+                 boundaryGap : false,//从0刻度开始
+                 // data:[]  X轴的定义
+                 data : function (){
+                     var list = ["release 1","release 2", "release 3", "release 4"];
+                     
+                     return list;
+                 }()
+             }
+         ],
+         yAxis : [
+             {
+                 type : 'value',
+                 axisLine:{
+                     show: false,
+                 }
+             }
+         ],
+         series : [
+             {
+                 type:'line',
+                 name:'Static',
+                 // symbol:'none',//原点
+                 smooth: 0.2,//弧度
+                 color:['rgba(0,0,100,0.5)'],
+                 // data:Y轴数据
+                 data:[1,0.6,0.8,0.7]
+             },
+             {
+                 type:'line',
+                 name:'Dynamic',
+                 // symbol:'none',//原点
+                 smooth: 0.2,//弧度
+                 color:['rgba(100,0,0,0.5)'],
+                 // data:Y轴数据
+                 data:[1,0.76,0.79,0.88]
+             },
+            //  {
+            //      type:'line',
+            //      name:'Thread',
+            //      // symbol:'none',//原点
+            //      smooth: 0.2,//弧度
+            //      color:['rgba(0,100,0,0.5)'],
+            //      // data:Y轴数据
+            //      data:[0.5,0.3,1,0.92]
+            //  },
+            //  {
+            //      type:'line',
+            //      name:'Socket',
+            //      // symbol:'none',//原点
+            //      smooth: 0.2,//弧度
+            //      color:['rgba(100,20,120,0.5)'],
+            //      // data:Y轴数据
+            //      data:[1,0.5,0.8,0.7]
+            //  },
+            //  {
+            //      type:'line',
+            //      name:'File Handler',
+            //      // symbol:'none',//原点
+            //      smooth: 0.2,//弧度
+            //      color:['rgba(20,100,200,0.5)'],
+            //      // data:Y轴数据
+            //      data:[0.83,1,0.79,0.53]
+            //  },
+            //  {
+            //      type:'line',
+            //      name:'Memory',
+            //      // symbol:'none',//原点
+            //      smooth: 0.2,//弧度
+            //      color:['rgba(200,20,100,0.5)'],
+            //      // data:Y轴数据
+            //      data:[1,0.73,0.89,0.67]
+            //  },
+         ]
+     };
+    zhexian.setOption(option);
+    function re_click(){
+        $(".re").css({
+            "backgroundColor": "rgb(200,200,200)",
+            "color": "rgb(240,240,240)"
+        });
+        $(this).css({
+            "backgroundColor": "rgb(212,130,101)",
+            "color": "white"
+        });
+    }
+    $(".re").click(re_click);
+
+</script>

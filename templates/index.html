@@ -1,0 +1,69 @@
+{% import 'macro/header.html' as header %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+<script src="{{url_for('static', filename='js/jquery-3.4.1.js')}}"></script>
+<style>
+    body{
+        background-image: url("{{url_for('static', filename='img/bg.img')}}");
+    }
+</style>
+<body>
+     <div id="page">  
+        <div id="header">
+            {{ header.header() }} 
+        </div> 
+      
+        <div id="login">
+           <div class="form">
+                <p>Username</p>
+                <input id="login_username" class="inputbox" name="username" type="text">
+                <p>Password</p>
+                <input id="login_password" class="inputbox" name="password" type="password">
+                <p class="description">Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter.</p>
+                <sapn id="tip1" class="tip"></sapn>
+                <button id="loginbutton" class="submit" name="login">Sign in</button>
+           </div>
+        </div>
+
+        <div id="register">
+            <div class="form">
+                <p>Username</p>
+                <input id="reg_username" class="inputbox username" name="username" type="text">
+                <p>Email</p>
+                <input id="reg_email" class="inputbox email" name="email" type="text">
+                <sapn id="tip3" class="tip">
+                    <img id ="duihao1" src="{{url_for('static', filename='img/duihao.png')}}">
+                    <img id ="chahao1" src="{{url_for('static', filename='img/chahao.png')}}">
+                </sapn>
+                <p>Password</p>
+                <input id="reg_password" class="inputbox password" name="password" type="password">
+                <sapn id="tip4" class="tip">
+                    <img id ="duihao2" src="{{url_for('static', filename='img/duihao.png')}}">
+                    <img id ="chahao2" src="{{url_for('static', filename='img/chahao.png')}}">
+                </sapn>
+                <p>Verify</p>
+                <input id="verify_password" class="inputbox password" name="password" type="password">
+                <p class="description">Make sure it's at least 15 characters OR at least 8 characters including a number and a lowercase letter.</p>
+                <sapn id="tip2" class="tip"></sapn>
+                <button id="registerbutton" class="submit" name="register" >Sign up for SouAna</button>
+                <p style="color: rgb(150,150,150)" class="description">By clicking “Sign up for SouAna", you agree to our Terms of Service and Privacy Statement.</p>
+            </div>
+        </div>
+
+        <div id="introduction">
+            <span>
+                Welcome to SouAna!
+            </span>
+            <p>
+                SouAna is a development platform inspired by the way you work. You can use this platform to measure the resources required by the source code, including sockets, file handles, memory, etc. 
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+<script src="{{url_for('static', filename='js/index.js')}}"></script>

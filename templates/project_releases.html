@@ -1,0 +1,187 @@
+{% import 'macro/header.html' as header %}
+{% import 'macro/project_nav.html' as project %}
+{% import 'macro/release.html' as release %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/header.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project_nav.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/project_releases.css')}}">
+<script src="{{url_for('static', filename='js/jquery-3.4.1.js')}}"></script>
+<script src="{{url_for('static', filename='js/echarts.min.js')}}"></script>
+
+
+<style>
+    body{
+        background-color: rgb(245, 245, 245);
+    }
+    #static_ana:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    }   
+    #modify_type:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    }   
+    #releases{
+        border-bottom:2px solid rgba(0,0,255,0.6);
+        color: rgb(120, 120, 120);
+    }
+    #result_details:hover{
+        border-bottom:2px solid rgb(200,200,200);
+    } 
+    .release{
+        cursor: pointer;
+    }  
+    #Project_v1{
+        border: 1px blue solid;
+    }
+    .dtip1{
+        font-size: 15px;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+    .dtip2{
+        margin-left: 10px;
+    }
+</style>
+
+<body>
+    <div id="page">
+        <div id="header">
+            {{ header.header() }}             
+            {{ header.name(username)}}
+        </div>  
+        <div class="project">
+            <span id="pro_id" style="display: none">{{project_info["project_id"]}}</span>
+            {{ project.project_nav(project_info) }}
+        </div>    
+        <div class="releases">
+            <p class="dtip1">Releases infomation</p>
+            {{ release.release(releases)}}
+            <p class="dtip1">Releases comparison</p>
+            <p class="dtip2">Following graphs show the comparison of resources in different versions. For visualization, results are normalized.</p>
+            <div class="comparison">
+                        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="static_comparison" style="width: 370px;height:300px;float: left;"></div>
+                <script type="text/javascript">
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('static_comparison'));
+                    // 指定图表的配置项和数据
+                    myChart.setOption({
+                        title: {
+                                text: 'Static result',
+                                x: 'center',
+                                y:'top',
+                                padding: 10,
+                                    textStyle: {
+                                    fontSize: 15,
+                                    color: 'rgb(100, 100, 100)'
+                                },
+                        },
+                        tooltip: {},
+                        legend: {
+                                data: ['v1','v2', 'v3', 'v4'],
+                                padding:40
+                        },
+                        xAxis: {
+                                data: ["DB","Process","Socket","Memeory"],
+                                axisLabel: {
+                                    interval:0, //设置成 0 强制显示所有标签。
+                                }
+                        },
+                        yAxis: {},
+                        series: [{
+                                name: 'v1',
+                                type: 'bar',
+                                data: ["0.6","1","0.6","1"]
+                        },
+                        {
+                                name: 'v2',
+                                type: 'bar',
+                                data: ["0.7","0.8","0.5","1"]
+                        },
+                        {
+                                name: 'v3',
+                                type: 'bar',
+                                data: ["1","0.6","0.3","0.9"]
+                        },
+                        {
+                                name: 'v4',
+                                type: 'bar',
+                                data: ["0.5","0.4","1","0.8"]
+                        },]
+                        
+                    });
+                    
+                </script>
+                <div id="dynamic_comparison" style="width: 370px;height: 300px;float:right;"></div>
+                <script type="text/javascript">
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('dynamic_comparison'));
+                    // 指定图表的配置项和数据
+                    myChart.setOption({
+                        title: {
+                                text: 'Dynamic result',
+                                padding: 10,
+                                x: 'center',
+                                y:'top',
+                                padding: 10,
+                                    textStyle: {
+                                    fontSize: 15,
+                                    color: 'rgb(100, 100, 100)'
+                                },
+                        },
+                        tooltip: {},
+                        legend: {
+                                data: ['v1','v2','v3','v4'],
+                                padding:40
+                        },
+                        xAxis: {
+                                data: ["DB","Process","Socket","Memeory"],
+                                axisLabel: {
+                                    interval:0, //设置成 0 强制显示所有标签。
+                                }
+                        },
+                        yAxis: {},
+                        series: [{
+                                name: 'v1',
+                                type: 'bar',
+                                data: ["0.6","1","0.6","1"]
+                        },
+                        {
+                                name: 'v2',
+                                type: 'bar',
+                                data: ["0.7","0.8","0.5","1"]
+                        },
+                        {
+                                name: 'v3',
+                                type: 'bar',
+                                data: ["1","0.6","0.3","0.9"]
+                        },
+                        {
+                                name: 'v4',
+                                type: 'bar',
+                                data: ["0.5","0.4","1","0.8"]
+                        },]
+                        
+                    });
+                
+                    
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="{{url_for('static', filename='js/header.js')}}"></script>
+<script>
+    $(".release").click(function(){
+        // alert($(this).attr('id'));
+        id = $(this).attr('id').split('_');
+        window.location.href = "/project/version?project_id="+id[0]+"&version_num="+id[1];
+    });
+</script>

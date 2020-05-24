@@ -1,0 +1,24 @@
+{% macro release(release_info) %}
+{% for release in release_info %}
+<div class="release_nav">
+    <span class="leftcol">                    
+        <p class="quanquan"></p>
+        <p class="lineline"></p>
+    </span>
+    <span class="rightcol">
+        <span class="release" id="{{release['project_id']}}_{{release['version_num']}}">{{release['project_name']}}_v{{release['version_num']}}</span>
+        <p class="release_desc">{{release['release_desc']}}</p>
+        <p>Date: {{release['date']}}</p>
+    </span>
+</div>
+
+{% endfor %}
+<div id="final_release" class="release_nav">
+    <span class="leftcol">                    
+        <p class="quanquan"></p>
+    </span>
+    <span class="rightcol">
+        <span>There are no more releases!</span>
+    </span>
+</div>
+{% endmacro %}
